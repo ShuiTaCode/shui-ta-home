@@ -2,23 +2,19 @@ import { useState, useCallback, useEffect } from 'react';
 import ReactFlow, {
   Controls,
   Background,
-  applyEdgeChanges,
-  applyNodeChanges,
   Node,
   Edge,
   Connection,
   addEdge,
   Panel,
   useNodesState,
-  useEdgesState,
-  Position,
-  MarkerType,
+  useEdgesState
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { 
   Box, 
   IconButton, 
-  Fab, 
+  Fab,
   Dialog, 
   DialogTitle, 
   DialogContent, 
@@ -33,10 +29,6 @@ import {
   Grid,
   Chip,
   Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   TableContainer,
   Table,
   TableHead,
@@ -47,23 +39,18 @@ import {
   Snackbar,
   Alert
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import AddIcon from '@mui/icons-material/Add';
-import MemoryIcon from '@mui/icons-material/Memory';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { FlowNode, FlowEdge, NodeType, BoardPort, FlowNodeData, BoardConnection, Port } from '../../types';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
+import { NodeType, FlowNode, BoardPort, FlowNodeData, BoardConnection } from '../../types';
 import { StorageObject, StorageBoard, StorageHome } from '../../types/storage';
 import StorageFactory from '../../services/StorageFactory';
 import CustomNode from './CustomNode';
-import PortNode from './PortNode';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BaseEntity } from '../../types/storage';
-import { StorageClient } from '../../services/StorageFactory';
 
 const nodeTypes = {
   custom: CustomNode,
-  port: PortNode
 };
 
 const initialNodes: FlowNode[] = [];
@@ -600,6 +587,19 @@ export const HomeFlow = () => {
 
   const handleBack = () => {
     navigate('/');
+  };
+
+  const createNode = (type: NodeType, position: { x: number, y: number }) => {
+    return {
+      id: crypto.randomUUID(),
+      type: 'custom',
+      position,
+      data: {
+        label: type,
+        nodeType: type,
+        onDelete: () => handleDeleteNode(id)
+      }
+    };
   };
 
   return (

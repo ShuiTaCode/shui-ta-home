@@ -1,11 +1,6 @@
 import { Node, Edge } from 'reactflow';
 
-export enum NodeType {
-  BOARD = 'board',
-  SENSOR = 'sensor',
-  MOTOR = 'motor',
-  LIGHT = 'light'
-}
+export type NodeType = 'board' | 'sensor' | 'motor' | 'light';
 
 export interface BoardPort {
   id: string;
