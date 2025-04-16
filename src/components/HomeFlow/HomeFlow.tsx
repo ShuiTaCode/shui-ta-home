@@ -78,8 +78,6 @@ export const HomeFlow = () => {
   });
   const [selectedNode, setSelectedNode] = useState<FlowNode | null>(null);
   const [logicDialogOpen, setLogicDialogOpen] = useState(false);
-  const [logicText, setLogicText] = useState('');
-  const [selectedPort, setSelectedPort] = useState<BoardPort | null>(null);
   const [boardDialogOpen, setBoardDialogOpen] = useState(false);
   const [boardData, setBoardData] = useState({
     label: '',
@@ -337,16 +335,12 @@ export const HomeFlow = () => {
     const flowNode = node as FlowNode;
     if (flowNode.data.nodeType === 'board') {
       setSelectedNode(flowNode);
-      setLogicText('');
-      setSelectedPort(null);
       setLogicDialogOpen(true);
     }
   };
 
   const handlePortClick = (port: BoardPort) => {
     console.log('Clicking port:', port);
-    setSelectedPort(port);
-    setLogicText(port.logic || '');
   };
 
   const handleAddConnection = async () => {
