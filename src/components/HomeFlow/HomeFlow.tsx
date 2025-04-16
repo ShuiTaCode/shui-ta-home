@@ -190,20 +190,6 @@ export const HomeFlow = () => {
     [setEdges, nodes, setNodes]
   );
 
-  // Funktion zum Finden des verbundenen Node/Port-Names
-  const getConnectedPortInfo = (portId: string) => {
-    const edge = edges.find(e => e.sourceHandle === portId || e.targetHandle === portId);
-    if (!edge) return null;
-
-    const connectedNodeId = edge.sourceHandle === portId ? edge.target : edge.source;
-    const connectedNode = nodes.find(n => n.id === connectedNodeId);
-    
-    return connectedNode ? {
-      nodeName: connectedNode.data.label,
-      nodeType: connectedNode.data.nodeType
-    } : null;
-  };
-
   const handleDeleteNode = useCallback(async (nodeId: string) => {
     try {
       // Bestimme den Typ des Nodes und wähle den entsprechenden Client
@@ -361,27 +347,6 @@ export const HomeFlow = () => {
     console.log('Clicking port:', port);
     setSelectedPort(port);
     setLogicText(port.logic || '');
-  };
-
-  const handleSaveLogic = () => {
-    if (selectedNode && selectedPort) {
-      const updatedNodes = nodes.map(node => {
-        if (node.id === selectedNode.id) {
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              ports: node.data.ports?.map(port => 
-                port.id === selectedPort.id ? { ...port, logic: logicText } : port
-              )
-            }
-          };
-        }
-        return node;
-      });
-      setNodes(updatedNodes);
-      setLogicDialogOpen(false);
-    }
   };
 
   const handleAddConnection = async () => {
