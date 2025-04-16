@@ -10,7 +10,9 @@ import ReactFlow, {
   addEdge,
   Panel,
   useNodesState,
-  useEdgesState
+  useEdgesState,
+  Position,
+  MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { 
@@ -50,13 +52,14 @@ import AddIcon from '@mui/icons-material/Add';
 import MemoryIcon from '@mui/icons-material/Memory';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { FlowNode, FlowEdge, NodeType, BoardPort, FlowNodeData, BoardConnection } from '../../types';
+import { FlowNode, FlowEdge, NodeType, BoardPort, FlowNodeData, BoardConnection, Port } from '../../types';
 import { StorageObject, StorageBoard, StorageHome } from '../../types/storage';
 import StorageFactory from '../../services/StorageFactory';
 import CustomNode from './CustomNode';
 import PortNode from './PortNode';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BaseEntity } from '../../types/storage';
+import { StorageClient } from '../../services/StorageFactory';
 
 const nodeTypes = {
   custom: CustomNode,
