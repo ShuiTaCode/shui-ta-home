@@ -44,7 +44,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
 import MemoryIcon from '@mui/icons-material/Memory';
-import { NodeType, FlowNode, BoardPort } from '../../types';
+import { NodeType, FlowNode, BoardPort, BoardConnection } from '../../types';
 import { StorageObject, StorageBoard } from '../../types/storage';
 import StorageFactory from '../../services/StorageFactory';
 import CustomNode from './CustomNode';
@@ -401,9 +401,12 @@ export const HomeFlow = () => {
       const updatedNodes = nodes.map(node => {
         if (node.id === selectedNode.id) {
           const connections = node.data.connections || [];
-          const newBoardConnection = {
+          const newBoardConnection: BoardConnection = {
             sourcePortId: newConnection.input,
-            targetPortId: newConnection.output
+            targetPortId: newConnection.output,
+            inputs: [newConnection.input],
+            outputs: [newConnection.output],
+            logic: newConnection.logic
           };
           const updatedNode: FlowNode = {
             ...node,
@@ -586,20 +589,6 @@ export const HomeFlow = () => {
 
   const handleBack = () => {
     navigate('/');
-  };
-
-  const createNode = (type: NodeType, position: { x: number, y: number }) => {
-    const nodeId = crypto.randomUUID();
-    return {
-      id: nodeId,
-      type: 'custom',
-      position,
-      data: {
-        label: type,
-        nodeType: type,
-        onDelete: () => handleDeleteNode(nodeId)
-      }
-    } as FlowNode;
   };
 
   return (

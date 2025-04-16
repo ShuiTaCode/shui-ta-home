@@ -1,4 +1,4 @@
-import { NodeType, Port, BoardConnection, BoardPort } from '../types';
+import { NodeType, BoardConnection, BoardPort } from '../types';
 
 export interface BaseEntity {
   id: string;
