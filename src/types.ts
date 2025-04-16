@@ -1,50 +1,10 @@
 import { Node, Edge } from 'reactflow';
 
-export interface Port {
-  id: string;
-  name: string;
-  connectedTo?: string;
-}
-
-export interface FlowNode {
-  id: string;
-  type: string;
-  position: {
-    x: number;
-    y: number;
-  };
-  data: {
-    label: string;
-    inputs?: Port[];
-    outputs?: Port[];
-    onDelete?: () => void;
-  };
-}
-
-export interface FlowEdge {
-  id: string;
-  source: string;
-  target: string;
-  sourceHandle?: string;
-  targetHandle?: string;
-}
-
 export enum NodeType {
   BOARD = 'board',
   SENSOR = 'sensor',
-  MOTOR = 'motor'
-}
-
-export interface FlowNodeData {
-  label: string;
-  inputs?: Port[];
-  outputs?: Port[];
-  onDelete?: () => void;
-}
-
-export interface BoardConnection {
-  sourcePortId: string;
-  targetPortId: string;
+  MOTOR = 'motor',
+  LIGHT = 'light'
 }
 
 export interface BoardPort {
@@ -53,6 +13,11 @@ export interface BoardPort {
   type: 'input' | 'output';
   connectedTo?: string;
   logic?: string;
+}
+
+export interface BoardConnection {
+  sourcePortId: string;
+  targetPortId: string;
 }
 
 export interface FlowNodeData {
@@ -64,5 +29,11 @@ export interface FlowNodeData {
   onDelete?: () => void;
 }
 
-export interface FlowNode extends Node<FlowNodeData> {}
-export interface FlowEdge extends Edge {} 
+export type FlowNode = Node<FlowNodeData>;
+export type FlowEdge = Edge;
+
+export interface Port {
+  id: string;
+  name: string;
+  connectedTo?: string;
+} 

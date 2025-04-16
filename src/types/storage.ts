@@ -1,26 +1,29 @@
-import { Port, BoardConnection } from '../types';
+import { NodeType, Port, BoardConnection, BoardPort } from '../types';
 
 export interface BaseEntity {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface StorageObject extends BaseEntity {
   label: string;
   content?: string;
-  nodeType: 'sensor' | 'motor' | 'light';
+  nodeType: NodeType;
   position: {
     x: number;
     y: number;
   };
-  homes: StorageHome[];
 }
 
 export interface StorageBoard extends BaseEntity {
-  name: string;
-  inputs: Port[];
-  outputs: Port[];
+  label: string;
+  content?: string;
+  position: {
+    x: number;
+    y: number;
+  };
+  ports: BoardPort[];
   connections: BoardConnection[];
 }
 
