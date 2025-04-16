@@ -13,6 +13,9 @@ export interface BoardPort {
 export interface BoardConnection {
   sourcePortId: string;
   targetPortId: string;
+  inputs: string[];
+  outputs: string[];
+  logic?: string;
 }
 
 export interface FlowNodeData {

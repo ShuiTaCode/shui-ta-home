@@ -43,8 +43,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
-import { NodeType, FlowNode, BoardPort, FlowNodeData, BoardConnection } from '../../types';
-import { StorageObject, StorageBoard, StorageHome } from '../../types/storage';
+import MemoryIcon from '@mui/icons-material/Memory';
+import { NodeType, FlowNode, BoardPort } from '../../types';
+import { StorageObject, StorageBoard } from '../../types/storage';
 import StorageFactory from '../../services/StorageFactory';
 import CustomNode from './CustomNode';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -346,7 +347,7 @@ export const HomeFlow = () => {
     }
   };
 
-  const handleNodeClick = (event: React.MouseEvent, node: Node) => {
+  const handleNodeClick = (_event: React.MouseEvent, node: Node) => {
     const flowNode = node as FlowNode;
     if (flowNode.data.nodeType === 'board') {
       setSelectedNode(flowNode);
@@ -400,25 +401,23 @@ export const HomeFlow = () => {
       const updatedNodes = nodes.map(node => {
         if (node.id === selectedNode.id) {
           const connections = node.data.connections || [];
-          const updatedNode = {
+          const newBoardConnection = {
+            sourcePortId: newConnection.input,
+            targetPortId: newConnection.output
+          };
+          const updatedNode: FlowNode = {
             ...node,
             data: {
               ...node.data,
-              connections: [...connections, {
-                inputs: [newConnection.input],
-                outputs: [newConnection.output],
-                logic: newConnection.logic
-              }]
+              connections: [...connections, newBoardConnection]
             }
           };
-          // Aktualisiere auch den selectedNode
           setSelectedNode(updatedNode);
           return updatedNode;
         }
         return node;
       });
 
-      // Aktualisiere den State
       setNodes(updatedNodes);
 
       // Speichere die Änderungen sofort
@@ -590,16 +589,17 @@ export const HomeFlow = () => {
   };
 
   const createNode = (type: NodeType, position: { x: number, y: number }) => {
+    const nodeId = crypto.randomUUID();
     return {
-      id: crypto.randomUUID(),
+      id: nodeId,
       type: 'custom',
       position,
       data: {
         label: type,
         nodeType: type,
-        onDelete: () => handleDeleteNode(id)
+        onDelete: () => handleDeleteNode(nodeId)
       }
-    };
+    } as FlowNode;
   };
 
   return (
