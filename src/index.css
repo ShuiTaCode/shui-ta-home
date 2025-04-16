@@ -1,0 +1,326 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Neue Custom Board Styles */
+.custom-board {
+  background: white;
+  border: 2px solid #1a192b;
+  border-radius: 8px;
+  overflow: visible;
+  width: fit-content !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.custom-board__header {
+  background: #f8f9fa;
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px 6px 0 0;
+}
+
+.custom-board__body {
+  padding: 12px;
+  display: flex;
+  gap: 24px;
+  width: fit-content !important;
+}
+
+.custom-board__column {
+  flex: 0 0 auto !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: fit-content !important;
+  min-width: unset !important;
+}
+
+.custom-board__label {
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.custom-board__port {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 6px 24px;
+  border-radius: 4px;
+  font-size: 12px;
+  min-height: 32px;
+  width: fit-content !important;
+  white-space: nowrap;
+}
+
+.custom-board__port-text {
+  flex: 1;
+  text-align: center;
+}
+
+.custom-board__handle {
+  width: 8px !important;
+  height: 8px !important;
+  background: #1a192b !important;
+  border-radius: 50% !important;
+}
+
+.custom-board__handle.source {
+  right: -4px !important;
+}
+
+.custom-board__handle.target {
+  left: -4px !important;
+}
+
+/* React Flow Basis-Styles */
+.react-flow__edge-path {
+  stroke: #1a192b;
+  stroke-width: 2;
+}
+
+.react-flow__node {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.react-flow__node.selected {
+  box-shadow: none !important;
+}
+
+.react-flow__node.selected .custom-board {
+  box-shadow: 0 0 0 2px #1a192b;
+}
+
+/* React Flow Container Fixes */
+.react-flow__node-default {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
+}
+
+/* Entferne alle festen Breiten von React Flow Containern */
+[class*="react-flow__node-"] {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
+}
+
+/* MUI Fixes */
+.css-1q4em4m {
+  overflow: visible !important;
+}
+
+.MuiBox-root {
+  overflow: visible !important;
+}
+
+.MuiList-root {
+  overflow: visible !important;
+}
+
+/* Genereller Fix für alle MUI-Komponenten */
+[class*="MuiBox"],
+[class*="MuiList"],
+[class*="MuiListItem"] {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+}
+
+/* Spezifischer Fix für die problematische Klasse */
+.css-1fxc5j4-MuiList-root {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+/* MUI Fixes - NUR für Board-Komponenten */
+.react-flow__node .css-1q4em4m {
+  overflow: visible !important;
+}
+
+.react-flow__node .MuiBox-root {
+  overflow: visible !important;
+}
+
+.react-flow__node .MuiList-root {
+  overflow: visible !important;
+}
+
+/* Genereller Fix für alle MUI-Komponenten - NUR innerhalb von React Flow */
+.react-flow__node [class*="MuiBox"],
+.react-flow__node [class*="MuiList"],
+.react-flow__node [class*="MuiListItem"] {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+}
+
+/* Spezifischer Fix für die problematische Klasse - NUR innerhalb von React Flow */
+.react-flow__node .css-1fxc5j4-MuiList-root {
+  overflow: visible !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+/* Home Card spezifische Styles */
+.MuiCard-root {
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.MuiCardContent-root {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.MuiCardMedia-root {
+  position: relative;
+}
+
+.MuiCardMedia-root::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+/* Stelle sicher, dass die Home-Card ihre ursprünglichen Eigenschaften behält */
+.MuiPaper-root:not(.react-flow__node *) {
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* React Flow Node Styles */
+.react-flow__node {
+  border: none !important;
+  background-color: #fff !important;
+  border-radius: 0 !important;
+}
+
+.react-flow__node-default {
+  background-color: #fff !important;
+  width: auto !important;
+}
+
+/* Board Styles */
+.custom-board {
+  background: white;
+  border: 2px solid #1a192b;
+  border-radius: 8px;
+  width: fit-content !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.custom-board__body {
+  background: white;
+  padding: 12px;
+  display: flex;
+  gap: 24px;
+  width: fit-content !important;
+}
